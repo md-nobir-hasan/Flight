@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BackendController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [FrontendController::class,'homePage']);
+Route::get('/', [FrontendController::class, 'homePage']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -28,9 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function(){
-    Route::get('/dashboard',[BackendController::class,'dashboard'])->name('dashboard');
-    Route::get('/profile',[BackendController::class,'profile'])->name('profile');
+Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
+
+    Route::get('/dashboard', [BackendController::class, 'dashboard'])->name('dashboard');
+    Route::get('/profile', [BackendController::class, 'profile'])->name('profile');
+    Route::resource('category', CategoryController::class);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
