@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\BackendController;
-use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\FrontendControllers;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,21 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [FrontendController::class,'homePage']);
+Route::get('/', [FrontendControllers::class,"homePage"]);
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function(){
-    Route::get('/dashboard',[BackendController::class,'dashboard'])->name('dashboard');
-    Route::get('/profile',[BackendController::class,'profile'])->name('profile');
 });
 
 require __DIR__.'/auth.php';
