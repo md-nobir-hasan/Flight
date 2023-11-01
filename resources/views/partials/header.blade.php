@@ -6,6 +6,7 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
      <title>{{ ENV('APP_NAME') }} - @stack('title')</title>
      <link rel="stylesheet" href="{{ asset('asset/bootstrap53.min.css') }}" />
+     <link rel="stylesheet" href="{{asset('asset/toastr/toastr.css')}}">
      @stack('css_linking')
      <style>
          #sidenav {
@@ -56,8 +57,8 @@
  <body>
      <div class="position-fixed text-bg-dark nshow mobile_hide z-1" id="sidenav">
          <div class="py-2 text-center bg-black position-relative">
-             <a href="" class="fs-2 text-decoration-none text-white fw-bold"> Brand Name</a>
-             <span class="position-absolute top-0 end-0 bg-danger d-md-none" id="close_sidenav">
+             <a href="" class="text-white fs-2 text-decoration-none fw-bold"> Brand Name</a>
+             <span class="top-0 position-absolute end-0 bg-danger d-md-none" id="close_sidenav">
                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                      class="bi bi-x-lg" viewBox="0 0 16 16">
                      <path
@@ -76,8 +77,8 @@
              </li>
              <li class="nav-item">
                  <a href="#sn1" data-bs-toggle="collapse" class="nav-link fw-bold fs-5"
-                     aria-expanded="false">Components</a>
-                 <div class="collapse bg-black" id="sn1">
+                     aria-expanded="false">Multiple component</a>
+                 <div class="bg-black collapse" id="sn1">
                      <ul class="nav nav-pills flex-column ps-3">
                          <li class="nav-item">
                              <a href="components/form.html" class="nav-link fs-5">Form</a>

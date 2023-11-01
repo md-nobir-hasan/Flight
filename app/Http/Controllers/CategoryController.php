@@ -13,7 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('pages.category.index');
+        $n['mdata'] = Category::all();
+        return view('pages.category.index',$n);
     }
 
     /**
@@ -21,7 +22,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.category.create');
     }
 
     /**
@@ -33,7 +34,7 @@ class CategoryController extends Controller
         Category::create([
             'name' => $request->title,
         ]);
-        return back()->with('msg','Category created successfully');
+        return redirect()->route('admin.category.index')->with('success','Category created successfully');
     }
 
     /**
@@ -49,7 +50,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('pages.category.edit',['mdata' => $category]);
     }
 
     /**
@@ -57,7 +58,9 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->update(['name'=>$request->title]);
+
+        return redirect()->route('admin.category.index')->with('success', 'Category updated successfully');
     }
 
     /**
