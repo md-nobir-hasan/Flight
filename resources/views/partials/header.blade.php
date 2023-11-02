@@ -73,7 +73,11 @@
              </li>
              <li class="nav-item">
                  <a href="{{ route('admin.category.index') }}"
-                     class="nav-link fw-bold fs-5 {{ Request::is('admin.category.*') ? 'active' : '' }} text-decoration-none">Category</a>
+                     class="nav-link fw-bold fs-5 {{ Request::routeIs('admin.category.*') ? 'active' : '' }} text-decoration-none">Category</a>
+             </li>
+             <li class="nav-item">
+                 <a href="{{ route('admin.subcategory.index') }}"
+                     class="nav-link fw-bold fs-5 {{ Request::routeIs('admin.subcategory.*') ? 'active' : '' }} text-decoration-none">Sub-category</a>
              </li>
              <li class="nav-item">
                  <a href="#sn1" data-bs-toggle="collapse" class="nav-link fw-bold fs-5"
