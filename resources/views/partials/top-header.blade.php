@@ -26,7 +26,7 @@
 
                 <li class="nav-item">
                     <a href="" class="nav-link">
-                        <img src="download.png" alt="User Image" height="60px">
+                        <img src="/storage/default/user-image.png" alt="User Image" height="60px">
                     </a>
                 </li>
             </ul>

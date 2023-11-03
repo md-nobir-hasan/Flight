@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,12 +34,15 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
+    //common url
+    Route::get('/delete/{model}/{id}', [DeleteController::class,'delete'])->name('delete');
+    Route::post('/fetch', [AjaxController::class,'fetch'])->name('fetch');
 
     Route::get('/dashboard', [BackendController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [BackendController::class, 'profile'])->name('profile');
     Route::resource('category', CategoryController::class);
     Route::resource('subcategory', SubcategoryController::class);
-    Route::get('/delete/{model}/{id}', [DeleteController::class,'delete'])->name('delete');
+    Route::resource('product', ProductController::class);
 
 });
 

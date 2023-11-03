@@ -80,6 +80,10 @@
                      class="nav-link fw-bold fs-5 {{ Request::routeIs('admin.subcategory.*') ? 'active' : '' }} text-decoration-none">Sub-category</a>
              </li>
              <li class="nav-item">
+                 <a href="{{ route('admin.product.index') }}"
+                     class="nav-link fw-bold fs-5 {{ Request::routeIs('admin.product.*') ? 'active' : '' }} text-decoration-none">Products</a>
+             </li>
+             <li class="nav-item">
                  <a href="#sn1" data-bs-toggle="collapse" class="nav-link fw-bold fs-5"
                      aria-expanded="false">Multiple component</a>
                  <div class="bg-black collapse" id="sn1">

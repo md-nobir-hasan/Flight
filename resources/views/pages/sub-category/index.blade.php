@@ -30,6 +30,7 @@
                             <tr>
                                 <th>SL.</th>
                                 <th>Sub-category</th>
+                                <th>Category</th>
                                 <th>Created at</th>
                                 <th>Action</th>
                             </tr>
@@ -39,6 +40,7 @@
                               <tr>
                                 <td>{{$loop->index + 1}}</td>
                                 <td>{{$md->name}}</td>
+                                <td>{{$md->category->name}}</td>
                                 <td>{{$md->created_at}}</td>
                                 <td class="d-flex">
                                     <a href="{{route('admin.subcategory.edit',$md->id)}}">

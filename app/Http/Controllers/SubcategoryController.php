@@ -14,7 +14,7 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        $n['mdata'] = Subcategory::all();
+        $n['mdata'] = Subcategory::with('category')->get();
         return view('pages.sub-category.index',$n);
     }
 
@@ -37,7 +37,7 @@ class SubcategoryController extends Controller
             'name' => $request->name,
             'category_id' => $request->category_id,
         ]);
-        return redirect()->route('admin.subcategory.index')->with('success',"$request->title created Successfully");
+        return redirect()->route('admin.subcategory.index')->with('success',"$request->name created Successfully");
     }
 
     /**
@@ -59,14 +59,14 @@ class SubcategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSubcategoryRequest $request, Subcategory $category)
+    public function update(UpdateSubcategoryRequest $request, Subcategory $subcategory)
     {
-        $category->update([
+        $subcategory->update([
             'name'=>$request->name,
             'category_id'=>$request->category_id
         ]);
 
-        return redirect()->route('admin.subcategory.index')->with('success', "$request->title updated Successfully");
+        return redirect()->route('admin.subcategory.index')->with('success', "$request->name updated Successfully");
     }
 
     /**

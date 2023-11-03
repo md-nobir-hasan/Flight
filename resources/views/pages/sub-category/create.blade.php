@@ -13,16 +13,7 @@
 
 @section('container')
     <div class="container px-5">
-        @isset($msg)
-            <div class="alert alert-success">
-                {{ $msg }}
-            </div>
-        @endisset
-@foreach ($errors->all() as $error)
-            <div class="alert alert-danger">
-                <p>{{$error}}</p>
-            </div>
-@endforeach
+
         <div class="shadow-lg card">
             <div class="card-header">
                 <h4 class="float-start">Add Sub-category</h4>
@@ -47,7 +38,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="category_id" class="form-label">category_id:</label>
+                                    <label for="category_id" class="form-label">Category:</label>
                                     <select name="category_id" id="category_id" class="form-select ">
                                         <option value="" hidden>Choose a category</option>
                                         @foreach ($categories as $cat)
