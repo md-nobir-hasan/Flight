@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -33,7 +34,13 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         // dd($request->title);
-        Product::create($request->all());
+        if($request->img){
+            $path = $request->file('img')->store('product', 'public');
+
+        }
+        $data = $request->all();
+        $data['img'] = $path;
+        Product::create($data);
         return redirect()->route('admin.product.index')->with('success',"$request->name created Successfully");
     }
 
@@ -50,7 +57,10 @@ class ProductController extends Controller
      */
     public function edit(Product $Product)
     {
-        return view('pages.product.edit',['mdata' => $Product]);
+        $n['mdata'] = Product::with('category','subcat')->find($Product->id);
+        $n['categories'] = category::all();
+
+        return view('pages.product.edit',$n);
     }
 
     /**
@@ -58,13 +68,21 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $product->update([
+        $data = [
             'name' => $request->name,
             'short_des' => $request->short_des,
             'des' => $request->des,
             'sku' => $request->sku,
             'category_id' => $request->category_id,
-        ]);
+            'subcategory_id' => $request->subcategory_id,
+        ];
+        if ($request->img) {
+            Storage::delete($product->img);
+            $path = $request->file('img')->store('product', 'public');
+            $data['img'] = $path;
+        }
+        $product->update($data);
+
 
         return redirect()->route('admin.product.index')->with('success', "$request->name updated Successfully");
     }

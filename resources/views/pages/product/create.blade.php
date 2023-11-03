@@ -7,9 +7,11 @@
 @endpush
 
 @push('custom_css')
-    <style>
-
-    </style>
+<style>
+    .ck-editor__editable {
+    min-height: 250px;
+}
+</style>
 @endpush
 
 @section('container')
@@ -23,7 +25,7 @@
                 </h4>
             </div>
             <div class="p-5 card-body">
-                <form action="{{ route('admin.product.store') }}" method="POST">
+                <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="m-auto w-md-75">
                         <div class="card">
@@ -142,9 +144,23 @@
 @endsection
 
 @push('js_linking')
+<script src="{{asset('asset/ck-editor/ckeditor.js')}}"></script>
 @endpush
 
 @push('custom_js')
+<script>
+        ClassicEditor
+        .create( document.querySelector( '#des' ))
+        .catch( error => {
+            console.error( error );
+        } );
+        ClassicEditor
+        .create( document.querySelector( '#short_des' ))
+        .catch( error => {
+            console.error( error );
+        } );
+
+</script>
     <script>
         @if (session('success'))
             toastr.success("{{ session('success') }}")

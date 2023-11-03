@@ -3,7 +3,9 @@
     Products
 @endpush
 @push('css_linking')
+ <style>
 
+ </style>
 @endpush
 
 @push('custom_css')
@@ -30,6 +32,7 @@
                             <tr>
                                 <th>SL.</th>
                                 <th>Name</th>
+                                <th>image</th>
                                 <th>SKU</th>
                                 <th>Short Description</th>
                                 <th>Description</th>
@@ -43,10 +46,13 @@
                             @foreach ($mdata as $md)
                               <tr>
                                 <td>{{$loop->index + 1}}</td>
+                                <td>
+                                    <img src="/storage/{{$md->img}}" alt="{{$md->name}}" class="img-thumbnail rounded" width="50px">
+                                </td>
                                 <td>{{$md->name}}</td>
                                 <td>{{$md->sku}}</td>
-                                <td>{{$md->short_des}}</td>
-                                <td>{{$md->des}}</td>
+                                <td>{!! Str::of($md->short_des)->words(3) !!}</td>
+                                <td>{!! Str::of($md->des)->words(3) !!}</td>
                                 <td>{{$md->category->name}}</td>
                                 <td>{{$md->subcat->name}}</td>
                                 <td>{{date('d-m-Y',strtotime($md->created_at))}}</td>

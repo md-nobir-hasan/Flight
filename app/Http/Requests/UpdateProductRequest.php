@@ -26,9 +26,8 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        dd($this->product);
         return [
-            'name' => "required|string|max:255|unique:products,name,$this->product",
+            'name' => "required|string|max:255|unique:products,name,". $this->product->id,
             'short_des' => 'nullable|string',
             'des' => 'nullable|string',
             'sku' => 'nullable|string|max:255',
