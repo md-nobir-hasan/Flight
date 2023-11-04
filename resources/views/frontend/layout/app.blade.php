@@ -15,7 +15,7 @@
     <title>{{$title}} || {{ENV('APP_NAME')}}</title>
     {!! $custom_stylesheet !!}
 </head>
-    <x-top-header/>
+    <x-top-header />
 
         {{ $slot }}
 
@@ -30,6 +30,17 @@
                         toastr.success('Susscessfully added')
                     }else{
                         taostr.error("Cant't added")
+                    }
+                })
+            }
+            function removed(id,model){
+                console.log(id,model);
+                axios.post("{{route('delete')}}",{id:id,mt:model}).then((res)=>{
+                    console.log(res);
+                    if(res){
+                        toastr.success('Susscessfully removed')
+                    }else{
+                        taostr.error("Cant't removed")
                     }
                 })
             }

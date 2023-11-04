@@ -414,36 +414,37 @@
                 <tbody>
                     @forelse ($carts as $cart)
                     <!-- 1 -->
-                    <tr class="h-[100px] border-b">
+                    <tr class="h-[100px] border-b" x-data="{count:1,total:'{{$cart->product->price}}',plus(price){ const c = ++this.count; this.total = price * c},
+                        minus(price){const m = --this.count;this.total = price * m;}}">
                         <td class="align-middle">
                             <div class="flex">
-                                <img class="w-[90px]" src="/storage/product/bedroom.50988bc9.png"
+                                <img class="w-[90px]" src="/storage/{{$cart->product->img}}"
                                     alt="bedroom image">
                                 <div class="flex flex-col justify-center ml-3">
-                                    <p class="text-xl font-bold">ITALIAN BED</p>
+                                    <p class="text-xl font-bold">{{$cart->product->name}}</p>
                                     <p class="text-sm text-gray-400">Size: XL</p>
                                 </div>
                             </div>
                         </td>
-                        <td class="mx-auto text-center">&#36;320</td>
+                        <td class="mx-auto text-center">&#36;{{$cart->product->price}}</td>
                         <td class="align-middle">
                             <div class="flex items-center justify-center">
-                                <button
+                                <button x-on:click="minus({{$cart->product->price}})"
                                     class="flex items-center justify-center w-8 h-8 duration-100 border cursor-pointer hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500">
                                     &minus;
                                 </button>
-                                <div
+                                <div x-text="count"
                                     class="flex items-center justify-center w-8 h-8 border-t border-b cursor-text active:ring-gray-500">
                                     1
                                 </div>
-                                <button
+                                <button x-on:click="plus({{$cart->product->price}})"
                                     class="flex items-center justify-center w-8 h-8 duration-100 border cursor-pointer hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500">
                                     &#43;
                                 </button>
                             </div>
                         </td>
-                        <td class="mx-auto text-center">&#36;320</td>
-                        <td class="align-middle">
+                        <td class="mx-auto text-center" x-text="total"></td>
+                        <td class="align-middle" onclick="removed({{$cart->id}},'Cart')">
                             <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor"
                                 class="w-5 h-5 m-0 cursor-pointer">
                                 <path fill-rule="evenodd"

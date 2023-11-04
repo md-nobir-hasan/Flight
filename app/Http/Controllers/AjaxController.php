@@ -21,7 +21,20 @@ class AjaxController extends Controller
         ]);
         if($data){
             return true;
-        }else return false;
+        }else {
+            return false;
+        }
+        // return response()->json($data);
+
+    }
+    public function dataDelete(Request $request){
+        $model = "App\\Models\\$request->mt";
+        $data = $model::find($request->id)->delete();
+        if($data){
+            return true;
+        }else {
+            return false;
+        };
         // return response()->json($data);
 
     }

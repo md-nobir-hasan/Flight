@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -21,8 +22,12 @@ class FrontendController extends Controller
     }
 
     public function cart(){
-        
-        $n['carts'] = Cart::with(['product','user'])->get();
-        return view('frontend.pages.cart',$n);
+        $user = Auth::user();
+        if($user){
+            $n['carts'] = Cart::with(['product','user'])->where('user_id',$user->id)->get();
+            return view('frontend.pages.cart',$n);
+        }else{
+            return to_route('login');
+        }
     }
 }

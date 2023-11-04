@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
     Route::middleware('auth')->group(function(){
         Route::get('/cart', [FrontendController::class, 'cart'])->name('cart');
         Route::post('/save', [AjaxController::class, 'dataSave'])->name('save');
+        Route::post('/delete', [AjaxController::class, 'dataDelete'])->name('delete');
     });
 //==================  End Frontend
 
