@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,5 +18,11 @@ class FrontendController extends Controller
         // dd($n);
 
         return view('frontend.pages.index',$n);
+    }
+
+    public function cart(){
+        
+        $n['carts'] = Cart::with(['product','user'])->get();
+        return view('frontend.pages.cart',$n);
     }
 }

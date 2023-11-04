@@ -1,3 +1,4 @@
+
 <div class="flex flex-col">
     <div class="relative flex">
         <img class="" src="/storage/{{$product->img}}" alt="{{$product->name}}">
@@ -72,8 +73,8 @@
             <p class="text-sm text-gray-400">(38)</p>
         </div>
 
-        <div>
-            <button class="w-full h-10 my-5 text-white bg-violet-900">
+        <div >
+            <button class="w-full h-10 my-5 text-white bg-violet-900" onclick="save({{$product->id}})">
                 Add to cart
             </button>
         </div>

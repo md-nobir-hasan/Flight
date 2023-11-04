@@ -21,7 +21,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [FrontendController::class, 'homePage']);
+//==================  Frontend
+    Route::get('/', [FrontendController::class, 'homePage'])->name('home');
+
+    Route::middleware('auth')->group(function(){
+        Route::get('/cart', [FrontendController::class, 'cart'])->name('cart');
+        Route::post('/save', [AjaxController::class, 'dataSave'])->name('save');
+    });
+//==================  End Frontend
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

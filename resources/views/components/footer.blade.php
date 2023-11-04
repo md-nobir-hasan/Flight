@@ -7,23 +7,23 @@
                 Lorem ipsum dolor sit amet consectetur <br>
                 adipisicing elit.
             </p>
-            <div class="mt-10 flex gap-3">
+            <div class="flex gap-3 mt-10">
                 <a href="https://github.com/bbulakh">
-                    <img class="h-5 w-5 cursor-pointer" src="storage/product/github.cb856a31.svg"
+                    <img class="w-5 h-5 cursor-pointer" src="storage/product/github.cb856a31.svg"
                         alt="github icon">
                 </a>
                 <a href="https://t.me/b_bulakh">
-                    <img class="h-5 w-5 cursor-pointer" src="storage/product/telegram.6fd8af50.svg"
+                    <img class="w-5 h-5 cursor-pointer" src="storage/product/telegram.6fd8af50.svg"
                         alt="telegram icon">
                 </a>
                 <a href="https://www.linkedin.com/in/bogdan-bulakh-393284190/">
-                    <img class="h-5 w-5 cursor-pointer" src="storage/product/linkedin.b0df3b3e.svg"
+                    <img class="w-5 h-5 cursor-pointer" src="storage/product/linkedin.b0df3b3e.svg"
                         alt="twitter icon">
                 </a>
             </div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
             <div class="mx-5 mt-10">
                 <p class="font-medium text-gray-500">FEATURES</p>
                 <ul class="text-sm leading-8">
