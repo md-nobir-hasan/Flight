@@ -6,9 +6,9 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class CategoryFactory extends Factory
+class SubcategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,6 +19,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => fake()->word(),
+            'category_id' => rand(1,9),
             'created_at' => Carbon::now(),
         ];
     }
