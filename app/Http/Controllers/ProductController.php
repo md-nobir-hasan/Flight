@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $n['mdata'] = Product::with('category','subcat')->get();
+        $n['mdata'] = Product::with('category','subcat')->orderBy('id','desc')->get();
         return view('pages.product.index',$n);
     }
 
@@ -73,6 +73,8 @@ class ProductController extends Controller
             'short_des' => $request->short_des,
             'des' => $request->des,
             'sku' => $request->sku,
+            'price' => $request->price,
+            'discount' => $request->discount,
             'category_id' => $request->category_id,
             'subcategory_id' => $request->subcategory_id,
         ];

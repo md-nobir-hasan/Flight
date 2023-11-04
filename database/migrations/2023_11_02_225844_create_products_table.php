@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->string("sku");
+            $table->integer("price");
+            $table->integer("discount")->default(0);
+            $table->bigInteger("view")->default(0);
             $table->text("short_des");
             $table->longText("des");
             $table->string("img");

@@ -19,6 +19,9 @@ class ProductFactory extends Factory
         return [
             'name' => fake()->word(),
             'sku' => "jfEK".rand(0,999999),
+            'price' => rand(5000,99999),
+            'discount' => rand(500,5000),
+            'view' => rand(0,20),
             'short_des' => fake()->paragraph(),
             'des' => fake()->paragraph(),
             'category_id'=> rand(1,9),

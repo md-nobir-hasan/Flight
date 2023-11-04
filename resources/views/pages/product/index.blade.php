@@ -31,8 +31,10 @@
                         <thead>
                             <tr>
                                 <th>SL.</th>
-                                <th>Name</th>
                                 <th>image</th>
+                                <th>Name</th>
+                                <th>Price(BDT)</th>
+                                <th>Discount(BDT)</th>
                                 <th>SKU</th>
                                 <th>Short Description</th>
                                 <th>Description</th>
@@ -47,9 +49,11 @@
                               <tr>
                                 <td>{{$loop->index + 1}}</td>
                                 <td>
-                                    <img src="/storage/{{$md->img}}" alt="{{$md->name}}" class="img-thumbnail rounded" width="50px">
+                                    <img src="/storage/{{$md->img}}" alt="{{$md->name}}" class="rounded img-thumbnail" width="50px">
                                 </td>
                                 <td>{{$md->name}}</td>
+                                <td>{{number_format($md->price)}}</td>
+                                <td>{{number_format($md->discount)}}</td>
                                 <td>{{$md->sku}}</td>
                                 <td>{!! Str::of($md->short_des)->words(3) !!}</td>
                                 <td>{!! Str::of($md->des)->words(3) !!}</td>

@@ -110,6 +110,28 @@
                                         @enderror
                                     </div>
 
+                                    <div class="col-md-12">
+                                        <label for="price" class="form-label">Price:</label>
+                                        <input type="number" name="price" class="form-control" id="price" step="1"
+                                            value="{{ old('price') }}">
+                                        @error('price')
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label for="discount" class="form-label">Discount:</label>
+                                        <input type="number" name="discount" class="form-control" id="discount" step="1"
+                                            value="{{ old('discount') }}">
+                                        @error('discount')
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
+
                                     <div class="col-md-12" >
                                         <label for="img" class="form-label">Image:</label>
                                         <input type="file" name="img" x-on:change='img=URL.createObjectURL($event.target.files[0])' class="form-control" id="img"
@@ -120,7 +142,7 @@
                                             </span>
                                         @enderror
                                         <div class="text-center">
-                                            <img :src="img" alt="" class="img-thumbnail rounded mt-2" height="200px" width="200px">
+                                            <img :src="img" alt="" class="mt-2 rounded img-thumbnail" height="200px" width="200px">
 
                                         </div>
                                     </div>

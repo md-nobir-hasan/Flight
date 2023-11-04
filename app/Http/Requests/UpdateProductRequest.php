@@ -30,6 +30,8 @@ class UpdateProductRequest extends FormRequest
             'name' => "required|string|max:255|unique:products,name,". $this->product->id,
             'short_des' => 'nullable|string',
             'des' => 'nullable|string',
+            'price' => 'required|numeric',
+            'discount' => 'nullable|numeric',
             'sku' => 'nullable|string|max:255',
             'category_id' => 'required|numeric|exists:categories,id',
             'subcategory_id' => 'required|integer|exists:subcategories,id',
