@@ -29,6 +29,8 @@ use Illuminate\Support\Facades\Route;
         Route::get('/cart', [FrontendController::class, 'cart'])->name('cart');
         Route::post('/save', [AjaxController::class, 'dataSave'])->name('save');
         Route::post('/delete', [AjaxController::class, 'dataDelete'])->name('delete');
+        Route::post('/checkout',[FrontendController::class,"checkout"])->name('checkout');
+        Route::get('/checkout/{id}',[FrontendController::class,"checkoutView"])->name('checkout.view');
     });
 //==================  End Frontend
 

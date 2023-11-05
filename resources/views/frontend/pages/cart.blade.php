@@ -174,8 +174,10 @@
     </nav>
     <!-- /breadcrumbs  -->
     </div>
-
+ <form action="{{route('checkout')}}" method="POST">
     <section class="container mx-auto flex-grow max-w-[1200px] border-b py-5 lg:flex lg:flex-row lg:py-10" x-data="{all_total: {{$all_total}}}">
+
+            @csrf
         <!-- Mobile cart table  -->
         <section class="container flex flex-col w-full gap-3 px-4 mx-auto my-3 md:hidden">
 
@@ -397,10 +399,6 @@
 
         <!-- Desktop cart table  -->
         <section class="hidden h-[600px] w-full max-w-[1200px] grid-cols-1 gap-3 px-5 pb-10 md:grid">
-
-
-
-
             <table class="table-fixed">
                 <thead class="h-16 bg-neutral-100">
                     <tr>
@@ -431,15 +429,16 @@
                         <td class="mx-auto text-center">&#36;{{$cart->product->price}}</td>
                         <td class="align-middle">
                             <div class="flex items-center justify-center">
-                                <button x-on:click="minus({{$cart->product->price}})"
+                                <button type="button" x-on:click="minus({{$cart->product->price}})"
                                     class="flex items-center justify-center w-8 h-8 duration-100 border cursor-pointer hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500">
                                     &minus;
                                 </button>
-                                <div x-text="count"
+                                <div
                                     class="flex items-center justify-center w-8 h-8 border-t border-b cursor-text active:ring-gray-500">
-                                    1
+                                    <input type="number" name="p[{{$loop->index}}][qty]" :value="count" readonly class="text-center border-none w-6">
+                                    <input type="hidden" name="p[{{$loop->index}}][product_id]" value="{{$cart->product_id}}">
                                 </div>
-                                <button x-on:click="plus({{$cart->product->price}})"
+                                <button type="button" x-on:click="plus({{$cart->product->price}})"
                                     class="flex items-center justify-center w-8 h-8 duration-100 border cursor-pointer hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500">
                                     &#43;
                                 </button>
@@ -569,18 +568,22 @@
 
                     <div class="flex justify-between py-5">
                         <p>Total</p>
-                        <p x-text="all_total">$1280</p>
+                        <p>
+                            <input type="number" step="1" name="total" :value="all_total" class="w-16 border-none text-right">
+                        </p>
                     </div>
 
-                    <a href="/checkout-address.html">
+
                         <button class="w-full px-5 py-2 text-white bg-violet-900">
                             Proceed to checkout
                         </button>
-                    </a>
+
                 </div>
             </div>
         </section>
-    </section>
 
+
+    </section>
+ </form>
     <!-- /Summary -->
 </x-frontend-layout>

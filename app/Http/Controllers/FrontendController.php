@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -41,5 +43,28 @@ class FrontendController extends Controller
             ]);
             return view('frontend.pages.product-details',$n);
 
+    }
+
+    public function checkout(Request $request){
+       $order = Order::create([
+            'user_id' => Auth::user()->id,
+            "total" => $request->total,
+        ]);
+
+        foreach($request->p as $pd){
+            // dd($pd);
+            OrderItem::create([
+                'product_id' => $pd['product_id'],
+                'qty' => $pd['qty'],
+                'order_id'=>$order->id,
+            ]);
+        }
+        $n['order'] = $order;
+        return to_route('checkout.view',$order->id);
+    }
+
+    public function checkoutView($id){
+        $n['order']=Order::find($id);
+        return view('frontend.pages.checkout', $n);
     }
 }
