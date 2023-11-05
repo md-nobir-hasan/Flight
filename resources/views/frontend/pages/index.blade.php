@@ -5,7 +5,7 @@
 
     {{-- Custom Stylesheet  --}}
     <x-slot name='custom_stylesheet'>
-        <link rel="stylesheet" href="{{ asset('asset/toastr/toastr.css') }}">
+
 
     </x-slot>
 

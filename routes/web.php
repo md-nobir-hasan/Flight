@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 //==================  Frontend
     Route::get('/', [FrontendController::class, 'homePage'])->name('home');
+    Route::get('/product-details/{id}', [FrontendController::class, 'productDetails'])->name('pd');
 
     Route::middleware('auth')->group(function(){
         Route::get('/cart', [FrontendController::class, 'cart'])->name('cart');

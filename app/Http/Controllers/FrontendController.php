@@ -24,10 +24,22 @@ class FrontendController extends Controller
     public function cart(){
         $user = Auth::user();
         if($user){
-            $n['carts'] = Cart::with(['product','user'])->where('user_id',$user->id)->get();
+            $n['carts'] = Cart::with(['product','user'])->where('user_id',$user->id)->orderBy('id','desc')->get();
+            $n['all_total'] = $n['carts']->sum('product.price');
+            // dd($n);
             return view('frontend.pages.cart',$n);
         }else{
             return to_route('login');
         }
+    }
+    public function productDetails($id){
+
+            $n['product'] = Product::with('category.product')->find($id);
+            // dd($n);
+            $n['product']->update([
+                'view' => ($n['product']->view + 1)
+            ]);
+            return view('frontend.pages.product-details',$n);
+
     }
 }

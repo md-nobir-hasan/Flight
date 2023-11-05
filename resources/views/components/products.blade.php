@@ -4,7 +4,7 @@
         <img class="" src="/storage/{{$product->img}}" alt="{{$product->name}}">
         <div
             class="absolute flex items-center justify-center w-full h-full gap-3 duration-150 opacity-0 hover:opacity-100">
-            <a href="/product-overview.html">
+            <a href="{{route('pd',$product->id)}}">
                 <span class="flex items-center justify-center w-8 h-8 rounded-full cursor-pointer bg-amber-400">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-4 h-4">
@@ -74,7 +74,7 @@
         </div>
 
         <div >
-            <button class="w-full h-10 my-5 text-white bg-violet-900" onclick="save({{$product->id}})">
+            <button class="w-full h-10 my-5 text-white bg-violet-900" onclick="save({{$product->id}},'Cart')">
                 Add to cart
             </button>
         </div>

@@ -175,7 +175,7 @@
     <!-- /breadcrumbs  -->
     </div>
 
-    <section class="container mx-auto flex-grow max-w-[1200px] border-b py-5 lg:flex lg:flex-row lg:py-10">
+    <section class="container mx-auto flex-grow max-w-[1200px] border-b py-5 lg:flex lg:flex-row lg:py-10" x-data="{all_total: {{$all_total}}}">
         <!-- Mobile cart table  -->
         <section class="container flex flex-col w-full gap-3 px-4 mx-auto my-3 md:hidden">
 
@@ -414,14 +414,16 @@
                 <tbody>
                     @forelse ($carts as $cart)
                     <!-- 1 -->
-                    <tr class="h-[100px] border-b" x-data="{count:1,total:'{{$cart->product->price}}',plus(price){ const c = ++this.count; this.total = price * c},
-                        minus(price){const m = --this.count;this.total = price * m;}}">
+                    <tr class="h-[100px] border-b" x-data="{count:1,total:'{{$cart->product->price}}',plus(price){ const c = ++this.count; const ttal = this.total = price * c; all_total = all_total+ (ttal-price)},
+                        minus(price){const m = --this.count;const ttal = this.total = price * m; all_total = all_total+ (ttal-price)}}">
                         <td class="align-middle">
                             <div class="flex">
                                 <img class="w-[90px]" src="/storage/{{$cart->product->img}}"
                                     alt="bedroom image">
                                 <div class="flex flex-col justify-center ml-3">
-                                    <p class="text-xl font-bold">{{$cart->product->name}}</p>
+                                    <a href="{{route('pd',$cart->product_id)}}">
+                                        <p class="text-xl font-bold">{{$cart->product->name}}</p>
+                                    </a>
                                     <p class="text-sm text-gray-400">Size: XL</p>
                                 </div>
                             </div>
@@ -444,7 +446,7 @@
                             </div>
                         </td>
                         <td class="mx-auto text-center" x-text="total"></td>
-                        <td class="align-middle" onclick="removed({{$cart->id}},'Cart')">
+                        <td class="align-middle" x-on:click="removed({{$cart->id}},'Cart')">
                             <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor"
                                 class="w-5 h-5 m-0 cursor-pointer">
                                 <path fill-rule="evenodd"
@@ -557,7 +559,7 @@
 
                     <div class="flex justify-between py-5 border-b">
                         <p>Subtotal</p>
-                        <p>$1280</p>
+                        <p x-text="all_total">$1280</p>
                     </div>
 
                     <div class="flex justify-between py-5 border-b">
@@ -567,7 +569,7 @@
 
                     <div class="flex justify-between py-5">
                         <p>Total</p>
-                        <p>$1280</p>
+                        <p x-text="all_total">$1280</p>
                     </div>
 
                     <a href="/checkout-address.html">
