@@ -17,6 +17,11 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('status')->default(0);
             $table->integer('total')->default(0);
+            $table->string('street')->nullable();
+            $table->string('city')->nullable();
+            $table->string('recipient')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->longText('note')->nullable();
             $table->timestamps();
         });
     }

@@ -1,7 +1,8 @@
+
 <x-frontend-layout>
 
     {{-- Page title  --}}
-    <x-slot name='title'>Checkout</x-slot>
+    <x-slot name='title'>Payment</x-slot>
 
     {{-- Custom Stylesheet  --}}
     <x-slot name='custom_stylesheet'>
@@ -13,92 +14,97 @@
     <x-slot name='custom_js'>
 
     </x-slot>
-        <div class="flex-grow">
+        <section class="flex-grow">
             <section class="container mx-auto max-w-[1200px] py-5 lg:flex lg:flex-row lg:py-10">
                 <h2 class="px-5 mx-auto text-2xl font-bold md:hidden">
-                    Complete Address
+                    Payment Method
                 </h2>
                 <!-- form  -->
                 <section class="grid w-full max-w-[1200px] grid-cols-1 gap-3 px-5 pb-10">
                     <table class="hidden lg:table">
                         <thead class="h-16 bg-neutral-100">
                             <tr>
-                                <th class="text-white bg-neutral-600">ADDRESS</th>
+                                <th>ADDRESS</th>
                                 <th>DELIVERY METHOD</th>
-                                <th>PAYMENT METHOD</th>
+                                <th class="text-white bg-neutral-600">PAYMENT METHOD</th>
                                 <th>ORDER REVIEW</th>
                             </tr>
                         </thead>
                     </table>
 
                     <div class="py-5">
-                        <form class="flex flex-col w-full gap-3" action="{{route('billing.info')}}" method="POST">
-                            @csrf
-                            <input type="hidden" name="id" value="{{$order->id}}">
-                            <div class="flex justify-between w-full gap-2">
-                                <div class="flex flex-col w-1/2">
-                                    <label class="flex" for="name">Full Name<span
-                                            class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
-                                    <input value="{{Auth::user()->name}}" name="name" id="name" class="w-full px-4 py-2 border outline-yellow-400" type="text"
-                                        placeholder="Sarah Johnson">
+                        <form class="flex flex-col w-full gap-3" action="">
+                            <div class="flex flex-col w-full">
+                                <label class="flex" for="name">Payment Card Number</label>
+                                <input x-mask="9999 9999 9999 9999" class="w-full px-4 py-2 border lg:w-1/2"
+                                    placeholder="1223 4568 7644 4839">
+                            </div>
+
+                            <div class="flex flex-col w-full">
+                                <label class="flex" for="name">Card Holder</label>
+                                <input class="w-full px-4 py-2 border lg:w-1/2" type="text"
+                                    placeholder="SARAH JOHNSON">
+                            </div>
+
+                            <div class="flex items-center gap-5 lg:w-1/2">
+                                <div class="flex flex-col">
+                                    <label class="flex" for="name">Expiry Date</label>
+
+                                    <div class="flex w-[150px] items-center gap-1">
+                                        <input x-mask="99" class="w-1/2 px-4 py-2 text-center border"
+                                            name="" id="" placeholder="10">
+
+                                        <span>&bsol;</span>
+
+                                        <input x-mask="99" class="w-1/2 px-4 py-2 text-center border"
+                                            name="" id="" placeholder="36">
+                                    </div>
                                 </div>
-                                <div class="flex flex-col w-1/2">
-                                    <label class="flex" for="name">Email Address<span
-                                            class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
-                                    <input value="{{Auth::user()->email}}" class="w-full px-4 py-2 border outline-yellow-400" type="text"
-                                        placeholder="exp@maybell.com" name="email" id="email">
+
+                                <div class="flex flex-col w-[60px] lg:w-[110px]">
+                                    <label class="flex" for="">CVV/CVC</label>
+                                    <input x-mask="999" class="w-full py-2 text-center border lg:w-1/2"
+                                        type="password" placeholder="&bull;&bull;&bull;">
                                 </div>
                             </div>
 
-                            <div class="flex justify-between w-full gap-2">
-                                <div class="flex flex-col w-1/2">
-                                    <label class="flex" for="name">Street<span
-                                            class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
-                                    <input name="street" class="w-full px-4 py-2 border outline-yellow-400" type="text"
-                                        placeholder="Big Serbian avenue, 18" id="Street">
-                                </div>
+                            <!-- another payment-methods -->
 
-                                <div class="flex flex-col w-1/2">
-                                    <label class="flex" for="name">City<span
-                                            class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
-                                    <input name="city" class="w-full px-4 py-2 border outline-yellow-400" type="text"
-                                        placeholder="Belgrade" id="city">
-                                </div>
-                            </div>
-
-                            <div class="flex justify-between w-full gap-2">
-                                <div class="flex flex-col w-1/2">
-                                    <label class="flex" for="zip_code">ZIP code<span
-                                            class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
-                                    <input name="zip_code" id="zip_code" x-mask="999999" class="w-full px-4 py-2 border outline-yellow-400"
-                                        placeholder="176356">
-                                </div>
-
-                                <div class="flex flex-col w-1/2">
-                                    <label class="flex" for="recipient">Recipient<span
-                                            class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
-                                    <input class="w-full px-4 py-2 border outline-yellow-400" type="text"
-                                        placeholder="Andrew Johnson" name="recipient" id="recipient">
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col">
-                                <label for="">Commentary</label>
-                                <textarea name="note" class="px-4 py-2 border outline-yellow-400" type="text"></textarea>
-                            </div>
-
+                            <h2 class="mt-10 text-xl font-medium text-left">
+                                Another methods:
+                            </h2>
+                            <section class="grid grid-cols-3 gap-4 my-4 w-fit lg:grid-cols-5">
+                                <img class="w-[100px] cursor-pointer" src="/payment-method-bitcoin.d253ddb4.svg"
+                                    alt="bitcoin icon">
+                                <img class="w-[100px] cursor-pointer" src="/payment-method-paypal.82e2199b.svg"
+                                    alt="paypal icon">
+                                <img class="w-[100px] cursor-pointer" src="/payment-method-stripe.97999724.svg"
+                                    alt="stripe icon">
+                                <img class="w-[100px] cursor-pointer" src="/payment-method-visa.7f3307d5.svg"
+                                    alt="visa icon">
+                                <img class="w-[100px] cursor-pointer" src="/payment-method-mastercard.043a5b74.svg"
+                                    alt="mastercard icon">
+                            </section>
+                            <!-- another payment-methods -->
+                        </form>
                     </div>
 
                     <div class="flex items-center justify-between w-full">
-                        <a href="/catalog.html" class="text-sm text-violet-900">&larr; Back to the shop</a>
+                        <a href="/catalog.html" class="hidden text-sm text-violet-900 lg:block">&larr; Back to the
+                            shop</a>
 
-                        <button class="px-4 py-2 bg-amber-400">Place an order</button>
+                        <div class="flex justify-center gap-2 mx-auto lg:mx-0">
+                            <a href="/checkout-delivery.html" class="px-4 py-2 text-white bg-purple-900">Previous
+                                step</a>
+
+                            <a href="/checkout-review.html" class="px-4 py-2 bg-amber-400">Checkout review</a>
+                        </div>
                     </div>
-                    </form>
                 </section>
                 <!-- /form  -->
 
                 <!-- Summary  -->
+
                 <section class="mx-auto w-full px-4 md:max-w-[400px]">
                     <div class="">
                         <div class="px-4 py-5 border shadow-md">
@@ -106,7 +112,7 @@
 
                             <div class="flex justify-between py-5 border-b">
                                 <p>Subtotal</p>
-                                <p>{{$order->total}}</p>
+                                <p>$1280</p>
                             </div>
 
                             <div class="flex justify-between py-5 border-b">
@@ -116,7 +122,7 @@
 
                             <div class="flex justify-between py-5">
                                 <p>Total</p>
-                                <p>{{$order->total}}</p>
+                                <p>$1280</p>
                             </div>
                         </div>
                     </div>
@@ -196,6 +202,7 @@
             </section>
 
             <!-- /Cons bages  -->
-        </div>
-
+        </section>
 </x-frontend-layout>
+
+

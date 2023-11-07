@@ -67,4 +67,25 @@ class FrontendController extends Controller
         $n['order']=Order::find($id);
         return view('frontend.pages.checkout', $n);
     }
+    public function billingInfo(Request $request){
+       $order = Order::find($request->id);
+       $order->update([
+        'street' => $request->street,
+        'city' => $request->city,
+        'recipient' => $request->recipient,
+        'zip_code' => $request->zip_code,
+        'note' => $request->note,
+       ]);
+        // $n['order']=Order::find($id);
+        return to_route('delivery', $request->id);
+    }
+    public function delivery($id){
+        $n['order']=Order::find($id);
+        return view('frontend.pages.delivery',$n);
+    }
+
+    public function paymentwayStore(Request $request){
+
+        return to_route('payment.view');
+    }
 }

@@ -31,6 +31,9 @@ use Illuminate\Support\Facades\Route;
         Route::post('/delete', [AjaxController::class, 'dataDelete'])->name('delete');
         Route::post('/checkout',[FrontendController::class,"checkout"])->name('checkout');
         Route::get('/checkout/{id}',[FrontendController::class,"checkoutView"])->name('checkout.view');
+        Route::post('/billing-info',[FrontendController::class, "billingInfo"])->name('billing.info');
+        Route::post('/delivery-method-submit',[FrontendController::class, ""])->name('paymentway.store');
+        Route::get('/delivery/{id}',[FrontendController::class,"delivery"])->name('delivery');
     });
 //==================  End Frontend
 
@@ -44,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
+Route::prefix('/admin')->name('admin.')->middleware(['auth', 'uc'])->group(function () {
     //common url
     Route::get('/delete/{model}/{id}', [DeleteController::class,'delete'])->name('delete');
     Route::post('/fetch', [AjaxController::class,'fetch'])->name('fetch');
